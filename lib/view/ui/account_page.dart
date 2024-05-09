@@ -2,6 +2,7 @@
 
 import 'package:cdio_project/controller/class_controller.dart';
 import 'package:cdio_project/model/parent/parent_model.dart';
+import 'package:cdio_project/view/ui/parent_update_page.dart';
 import 'package:cdio_project/view/ui/post_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -267,7 +268,7 @@ class AccountPage extends StatelessWidget {
                                       children: [
                                         GestureDetector(
                                           onTap: () {
-
+                                            Get.to(()=>ParentUpdatePage());
                                           },
                                           child: Text(
                                             'Cập Nhật',

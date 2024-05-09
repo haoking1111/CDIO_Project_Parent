@@ -18,12 +18,28 @@ import 'login_parent_page.dart';
 class AccountPage extends StatelessWidget {
   AccountPage({super.key});
 
+
+
   @override
   Widget build(BuildContext context) {
     final controllerParent = Get.put<ParentController>(ParentController());
+
     final controllerChild = Get.put<ChildController>(ChildController());
+
     final controllerClass = Get.put<ClassController>(ClassController());
+
     final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+    Future<void> clearDataAndCloseRoutes() async {
+      // Xóa dữ liệu
+      final SharedPreferences? prefs = await _prefs;
+      prefs?.clear();
+      // Đóng tất cả các controller và route
+      Get.deleteAll();
+    }
+
+
+
     return Scaffold(
       body: Obx(() {
         if(controllerParent.isLoading.value && controllerChild.isLoading.value) {
@@ -275,12 +291,12 @@ class AccountPage extends StatelessWidget {
 
 //logout
                             GestureDetector(
-
-                                onTap: () async {
-                                  final SharedPreferences? prefs = await _prefs;
-                                  prefs?.clear();
-                                  Get.offAll(()=> LoginParentPage());
-                                },
+                              onTap: () async {
+                                // Xóa dữ liệu và đóng route trước khi chuyển đến trang đăng nhập
+                                await clearDataAndCloseRoutes();
+                                // Chuyển đến trang đăng nhập
+                                await Get.offAll(() => const LoginParentPage());
+                              },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [

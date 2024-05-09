@@ -307,7 +307,7 @@ class HomePage extends StatelessWidget {
                                           children: [
                                             RawMaterialButton(
                                               onPressed: () {
-                                                Get.to(()=>const CommentsTeacherPage());
+                                                Get.to(()=>CommentsTeacherPage());
                                               },
                                               elevation: 2.0,
                                               fillColor: Colors.lightBlue[50],

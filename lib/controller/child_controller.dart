@@ -53,7 +53,7 @@ class ChildController extends GetxController{
 
         print(child.value.fullName);
         print(child.value.age);
-        print(child.value.hobby);
+        print('teacherId: ${child.value.teacherId}');
         print('classid: ${child.value.classroomId.toString()}');
 
 

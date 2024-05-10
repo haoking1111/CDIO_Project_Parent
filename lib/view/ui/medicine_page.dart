@@ -23,8 +23,8 @@ class _MedicinePageState extends State<MedicinePage> {
         final controllerMedicineReminder = Get.put(MedicineReminderController());
           Child child = controllerChild.child.value;
           return SizedBox(
-            height: 900,
             width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             child: SingleChildScrollView(
               child: Stack(
                   children: [
@@ -55,7 +55,6 @@ class _MedicinePageState extends State<MedicinePage> {
                     Container(
                       margin: const EdgeInsets.only(top: 240),
                       width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: const BorderRadius.only(

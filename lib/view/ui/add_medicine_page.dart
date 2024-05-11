@@ -2,23 +2,23 @@ import 'package:cdio_project/controller/parent_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ParentUpdatePage extends StatefulWidget {
-  const ParentUpdatePage({super.key});
+import '../../common/toast.dart';
+import '../../controller/medicine_reminder_controller.dart';
+
+class AddMedicineReminderPage extends StatefulWidget {
+  const AddMedicineReminderPage({super.key});
 
   @override
-  State<ParentUpdatePage> createState() => _ParentUpdatePageState();
+  State<AddMedicineReminderPage> createState() => _AddMedicineReminderPageState();
 }
 
-class _ParentUpdatePageState extends State<ParentUpdatePage> {
-  final parentController = Get.find<ParentController>();
+class _AddMedicineReminderPageState extends State<AddMedicineReminderPage> {
+  final medicineReminderController = Get.find<MedicineReminderController>();
 
   bool isLoading = false;
 
-  TextEditingController fullNameController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-
+  TextEditingController commentController = TextEditingController();
+  TextEditingController currentStatusController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,25 +27,40 @@ class _ParentUpdatePageState extends State<ParentUpdatePage> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(50),
-              bottomRight: Radius.circular(20)
-            )
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(50),
+                  bottomRight: Radius.circular(20)
+              )
           ),
           child: Stack(
             children: [
-              Container(
-                height: 400,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  color: Colors.teal,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(40),
-                    bottomRight: Radius.circular(40)
-                  )
-                ),
+              Column(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height/2,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(40),
+                            bottomRight: Radius.circular(40)
+                        )
+                    ),
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height/2,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        color: Colors.teal[800],
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(40),
+                            topRight: Radius.circular(40)
+                        )
+                    ),
+                  ),
+                ],
               ),
-        
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
                 child: Column(
@@ -55,14 +70,14 @@ class _ParentUpdatePageState extends State<ParentUpdatePage> {
                         onPressed: () {
                           Get.back();
                         },
-                        icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 25,)
+                        icon: Icon(Icons.arrow_back_ios, color: Colors.black, size: 25,)
                     ),
 
-                    SizedBox(height: 55,),
-        
+                    SizedBox(height: 80,),
+
                     Center(
                       child: Container(
-                        height: 500,
+                        height: 450,
                         width: 350,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -78,10 +93,16 @@ class _ParentUpdatePageState extends State<ParentUpdatePage> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              
+                              Icon(Icons.health_and_safety, size: 100, color: Colors.teal[700],),
+
+                              SizedBox(height: 20,),
+                              
                               //thong tin
                               Text(
-                                'Thông Tin',
+                                'Dặn Thuốc',
                                 style: TextStyle(
                                   fontSize: 29,
                                   fontWeight: FontWeight.bold,
@@ -89,14 +110,14 @@ class _ParentUpdatePageState extends State<ParentUpdatePage> {
                                 ),
                               ),
 
-                              SizedBox(height: 10,),
+                              SizedBox(height: 20,),
 
                               //name
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Icon(
-                                    Icons.supervisor_account_outlined,
+                                    Icons.comment,
                                     size: 30,
                                   ),
 
@@ -108,7 +129,7 @@ class _ParentUpdatePageState extends State<ParentUpdatePage> {
                                         borderRadius: BorderRadius.circular(12)),
                                     child: TextField(
                                       style: TextStyle(color: Colors.white),
-                                      controller: fullNameController,
+                                      controller: commentController,
                                       decoration: InputDecoration(
                                         enabledBorder: OutlineInputBorder(
                                           borderSide:
@@ -120,9 +141,9 @@ class _ParentUpdatePageState extends State<ParentUpdatePage> {
                                           const BorderSide(color: Colors.teal),
                                           borderRadius: BorderRadius.circular(30),
                                         ),
-                                        hintText: 'Họ và tên bố mẹ',
+                                        hintText: 'Lời dặn dò',
                                         hintStyle:
-                                        TextStyle(color: Colors.white, fontSize: 15),
+                                        TextStyle(color: Colors.white70, fontSize: 15),
                                         fillColor: Colors.teal[300],
                                         filled: true,
                                       ),
@@ -137,7 +158,7 @@ class _ParentUpdatePageState extends State<ParentUpdatePage> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Icon(Icons.phone, size: 25,),
+                                  Icon(Icons.perm_contact_cal, size: 33,),
 
                                   Container(
                                     width: 250,
@@ -147,7 +168,7 @@ class _ParentUpdatePageState extends State<ParentUpdatePage> {
                                         borderRadius: BorderRadius.circular(12)),
                                     child: TextField(
                                       style: TextStyle(color: Colors.white),
-                                      controller: phoneNumberController,
+                                      controller: currentStatusController,
                                       decoration: InputDecoration(
                                         enabledBorder: OutlineInputBorder(
                                           borderSide:
@@ -159,9 +180,9 @@ class _ParentUpdatePageState extends State<ParentUpdatePage> {
                                           const BorderSide(color: Colors.teal),
                                           borderRadius: BorderRadius.circular(30),
                                         ),
-                                        hintText: 'Số điện thoại',
+                                        hintText: 'Sức khỏe hiện tại của bé',
                                         hintStyle:
-                                        TextStyle(color: Colors.white, fontSize: 15),
+                                        TextStyle(color: Colors.white70, fontSize: 15),
                                         fillColor: Colors.teal[300],
                                         filled: true,
                                       ),
@@ -170,85 +191,7 @@ class _ParentUpdatePageState extends State<ParentUpdatePage> {
                                 ],
                               ),
 
-                              SizedBox(height: 20,),
-
-                              //address
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Icon(Icons.home, size: 25,),
-
-                                  Container(
-                                    width: 250,
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.white),
-                                        borderRadius: BorderRadius.circular(12)),
-                                    child: TextField(
-                                      style: TextStyle(color: Colors.white),
-                                      controller: addressController,
-                                      decoration: InputDecoration(
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide:
-                                          const BorderSide(color: Colors.white),
-                                          borderRadius: BorderRadius.circular(30),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide:
-                                          const BorderSide(color: Colors.teal),
-                                          borderRadius: BorderRadius.circular(30),
-                                        ),
-                                        hintText: 'Địa chỉ',
-                                        hintStyle:
-                                        TextStyle(color: Colors.white, fontSize: 15),
-                                        fillColor: Colors.teal[300],
-                                        filled: true,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                              SizedBox(height: 20,),
-
-                              //email
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Icon(Icons.email, size: 25,),
-
-                                  Container(
-                                    width: 250,
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.white),
-                                        borderRadius: BorderRadius.circular(12)),
-                                    child: TextField(
-                                      style: TextStyle(color: Colors.white),
-                                      controller: emailController,
-                                      decoration: InputDecoration(
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide:
-                                          const BorderSide(color: Colors.white),
-                                          borderRadius: BorderRadius.circular(30),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide:
-                                          const BorderSide(color: Colors.teal),
-                                          borderRadius: BorderRadius.circular(30),
-                                        ),
-                                        hintText: 'Email',
-                                        hintStyle:
-                                        TextStyle(color: Colors.white, fontSize: 15),
-                                        fillColor: Colors.teal[300],
-                                        filled: true,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                              SizedBox(height: 50,),
+                              SizedBox(height: 40,),
 
                               //button update
                               GestureDetector(
@@ -266,12 +209,15 @@ class _ParentUpdatePageState extends State<ParentUpdatePage> {
                                     },
                                   );
 
-                                  await parentController.updateParent(
-                                      fullNameController.text.trim(),
-                                      phoneNumberController.text.trim(),
-                                      addressController.text.trim(),
-                                      emailController.text.trim()
-                                  ); // Call login function
+                                  Future.delayed(Duration(seconds: 1),() async {
+                                    await medicineReminderController.addMedicineReminder(
+                                      commentController.text.trim(),
+                                      currentStatusController.text.trim(),
+                                    );
+                                    Get.back();
+                                    showToast(message: 'Thêm dặn dò thành công');
+                                  },
+                                  );
                                 },
                                 child: Container(
                                   height: 45,
@@ -279,14 +225,7 @@ class _ParentUpdatePageState extends State<ParentUpdatePage> {
                                   decoration: BoxDecoration(
                                     color: Colors.teal[500],
                                     borderRadius: BorderRadius.circular(15),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color:
-                                          Colors.lightBlue.withOpacity(0.3),
-                                          spreadRadius: 2,
-                                          blurRadius: 8,
-                                          offset: const Offset(0, 2))
-                                    ],
+
                                   ),
                                   child: Center(
                                     child: AnimatedSwitcher(
@@ -303,7 +242,7 @@ class _ParentUpdatePageState extends State<ParentUpdatePage> {
                                         color: Colors.white,
                                       )
                                           : Text(
-                                        'Cập nhật',
+                                        'Thêm Mới',
                                         style: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
@@ -321,7 +260,7 @@ class _ParentUpdatePageState extends State<ParentUpdatePage> {
                   ],
                 ),
               )
-        
+
             ],
           ),
         ),

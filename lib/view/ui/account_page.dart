@@ -1,5 +1,7 @@
 
 
+import 'dart:async';
+
 import 'package:cdio_project/controller/class_controller.dart';
 import 'package:cdio_project/model/parent/parent_model.dart';
 import 'package:cdio_project/view/ui/parent_update_page.dart';
@@ -16,30 +18,53 @@ import '../../model/class/class_model.dart';
 import 'login_parent_page.dart';
 
 
-class AccountPage extends StatelessWidget {
-  AccountPage({super.key});
+class AccountPage extends StatefulWidget {
+  const AccountPage({super.key});
 
+  @override
+  State<AccountPage> createState() => _AccountPageState();
+}
 
+class _AccountPageState extends State<AccountPage> {
+
+  final controllerParent = Get.put<ParentController>(ParentController());
+
+  final controllerChild = Get.put<ChildController>(ChildController());
+
+  final controllerClass = Get.put<ClassController>(ClassController());
+
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  late Timer _timer; // Khai báo timer ở đây
+
+  @override
+  void initState() {
+    super.initState();
+    // Khởi tạo timer trong phương thức initState
+    _timer = Timer.periodic(const Duration(seconds: 2), (_) {
+      controllerClass.fetchClass();
+      controllerChild.fetchChild();
+      controllerParent.fetchParent();
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    // Hủy bỏ timer trong phương thức dispose
+    _timer.cancel();
+  }
+
+  Future<void> clearDataAndCloseRoutes() async {
+    // Xóa dữ liệu
+    final SharedPreferences? prefs = await _prefs;
+    prefs?.clear();
+    // Đóng tất cả các controller và route
+    Get.deleteAll();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final controllerParent = Get.put<ParentController>(ParentController());
-
-    final controllerChild = Get.put<ChildController>(ChildController());
-
-    final controllerClass = Get.put<ClassController>(ClassController());
-
-    final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-
-    Future<void> clearDataAndCloseRoutes() async {
-      // Xóa dữ liệu
-      final SharedPreferences? prefs = await _prefs;
-      prefs?.clear();
-      // Đóng tất cả các controller và route
-      Get.deleteAll();
-    }
-
-
 
     return Scaffold(
       body: Obx(() {
@@ -66,7 +91,7 @@ class AccountPage extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.only(top: 180),
                         width: MediaQuery.of(context).size.width,
-                        height: 600,
+                        height: MediaQuery.of(context).size.height,
                         decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
@@ -107,7 +132,7 @@ class AccountPage extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                     Text(
+                                    Text(
                                       '${child.fullName}',
                                       style: TextStyle(
                                           fontSize: 17,
@@ -124,7 +149,7 @@ class AccountPage extends StatelessWidget {
                                   ],
                                 ),
 
-                                 Text(
+                                Text(
                                   'Lớp: ${classInf.name}',
                                 )
                               ],
@@ -293,10 +318,41 @@ class AccountPage extends StatelessWidget {
 //logout
                             GestureDetector(
                               onTap: () async {
-                                // Xóa dữ liệu và đóng route trước khi chuyển đến trang đăng nhập
-                                await clearDataAndCloseRoutes();
-                                // Chuyển đến trang đăng nhập
-                                await Get.offAll(() => const LoginParentPage());
+                                // // Xóa dữ liệu và đóng route trước khi chuyển đến trang đăng nhập
+                                // await clearDataAndCloseRoutes();
+                                // //dung time
+                                // _timer.cancel();
+                                // // Chuyển đến trang đăng nhập
+                                // await Get.offAll(() => const LoginParentPage());
+                                Get.dialog(
+                                    AlertDialog(
+                                      backgroundColor: Colors.teal[400],
+                                      title: Text('Đăng Xuất', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),),
+                                      content: Text('Bạn có muốn đăng xuất không ?', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Get.back();
+                                            },
+                                            child: Text('Hủy', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 15),)
+                                        ),
+
+                                        TextButton(
+                                            onPressed: ()async {
+                                              // Xóa dữ liệu và đóng route trước khi chuyển đến trang đăng nhập
+                                              await clearDataAndCloseRoutes();
+                                              //dung time
+                                              _timer.cancel();
+                                              // Chuyển đến trang đăng nhập
+                                              await Get.offAll(() => const LoginParentPage());
+                                              Get.back();
+                                            },
+                                            child: Text('Đăng xuất', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 15),)
+                                        ),
+
+                                      ],
+                                    )
+                                );
                               },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
@@ -812,4 +868,5 @@ class AccountPage extends StatelessWidget {
     );
   }
 }
+
 

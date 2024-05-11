@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi';
 
@@ -6,6 +7,7 @@ import 'package:cdio_project/model/child/child_model.dart';
 import 'package:cdio_project/model/medicine/medicine_reminder_model.dart';
 import 'package:get/get.dart';
 import '../common/api_url.dart';
+import '../common/toast.dart';
 import 'auth_controller.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,9 +23,10 @@ class MedicineReminderController extends GetxController {
     fetchMedicineReminder();
   }
 
+
   fetchMedicineReminder() async {
-    // Đợi cho hoạt động lấy thông tin trẻ em hoàn thành trước
-    await childController.fetchChild();
+    // // Đợi cho hoạt động lấy thông tin trẻ em hoàn thành trước
+    // await childController.fetchChild();
 
     Child child = childController.child.value;
     try {
@@ -83,6 +86,50 @@ class MedicineReminderController extends GetxController {
     } catch (e) {
       print('error: ' + e.toString());
       // or throw an exception
+    }
+  }
+
+  addMedicineReminder(String comment, String currentStatus) async {
+    Child child = childController.child.value;
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${await AuthController.readToken()}'
+    };
+    var request = http.Request(
+        'POST',
+        Uri.parse(ApiUrl.addMedicineReminderUrl));
+    request.body = json.encode({
+      "comment": comment,
+      "currentStatus": currentStatus,
+      "childId": child.id
+    });
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+    }
+    else {
+      print(response.reasonPhrase);
+    }
+  }
+
+  deleteMedicineReminder(int? medicineReminderId) async {
+    var headers = {
+      'Authorization': 'Bearer ${await AuthController.readToken()}'
+    };
+    var request = http.Request(
+        'DELETE',
+        Uri.parse('${ApiUrl.deleteMedicineReminderUrl}/${medicineReminderId}'));
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+    }
+    else {
+      print(response.reasonPhrase);
     }
   }
 

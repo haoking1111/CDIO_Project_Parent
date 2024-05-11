@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:cdio_project/controller/medicine_reminder_controller.dart';
 import 'package:cdio_project/model/medicine/medicine_reminder_model.dart';
+import 'package:cdio_project/view/ui/add_medicine_page.dart';
 import 'package:cdio_project/view/ui/dashboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,12 +18,31 @@ class MedicinePage extends StatefulWidget {
 }
 
 class _MedicinePageState extends State<MedicinePage> {
+  final controllerChild = Get.put<ChildController>(ChildController());
+  final controllerMedicineReminder = Get.put(MedicineReminderController());
+
+  late Timer _timer; // Khai báo timer ở đây
+
+  @override
+  void initState() {
+    super.initState();
+    // Khởi tạo timer trong phương thức initState
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      controllerMedicineReminder.fetchMedicineReminder();
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    // Hủy bỏ timer trong phương thức dispose
+    _timer.cancel();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
-        final controllerChild = Get.put<ChildController>(ChildController());
-        final controllerMedicineReminder = Get.put(MedicineReminderController());
           Child child = controllerChild.child.value;
           return SizedBox(
             width: MediaQuery.of(context).size.width,
@@ -61,13 +83,6 @@ class _MedicinePageState extends State<MedicinePage> {
                           topLeft: Radius.circular(35),
                           topRight: Radius.circular(35),
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.teal.withOpacity(0.1),
-                              spreadRadius: 12,
-                              blurRadius: 4,
-                              offset: const Offset(0, 2))
-                        ],
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
@@ -227,6 +242,38 @@ class _MedicinePageState extends State<MedicinePage> {
 
                             const Divider(color: Colors.black45, thickness: 1,),
 
+                            const SizedBox(height: 5,),
+
+                            //btn add
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(()=> AddMedicineReminderPage());
+                              },
+                              child: Row(
+                                mainAxisAlignment:MainAxisAlignment.end,
+                                children: [
+                                  Container(
+                                    width: 90,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      color: Colors.teal,
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'Thêm dặn dò',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+
                             ListView.builder(
                               padding: EdgeInsets.zero,
                               shrinkWrap: true, // Add this line
@@ -235,7 +282,7 @@ class _MedicinePageState extends State<MedicinePage> {
                               itemBuilder: (context, index) {
                                 final medicineReminderItem = controllerMedicineReminder.medicineReminder.value[index];
                                 return Padding(
-                                  padding: const EdgeInsets.only(top: 20),
+                                  padding:  EdgeInsets.only(top: 10),
                                   child: Container(
                                     height: 150,
                                     width: MediaQuery.of(context).size.width,
@@ -251,12 +298,48 @@ class _MedicinePageState extends State<MedicinePage> {
                                         ]
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsets.all(10.0),
+                                      padding:  EdgeInsets.all(10.0),
                                       child: Column(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          const Text(
+                                          //btn delected
+                                          GestureDetector(
+                                            onTap: () {
+
+                                              Get.dialog(
+                                                AlertDialog(
+                                                  backgroundColor: Colors.teal[400],
+                                                  title: Text('Xóa Dặn Thuốc', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),),
+                                                  content: Text('Bạn có muốn xóa bảng dặn thuốc này không ?', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),),
+                                                  actions: [
+                                                    TextButton(
+                                                        onPressed: () {
+                                                          Get.back();
+                                                        },
+                                                        child: Text('Hủy', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 15),)
+                                                    ),
+
+                                                    TextButton(
+                                                        onPressed: () {
+                                                          controllerMedicineReminder.deleteMedicineReminder(medicineReminderItem.id);
+                                                          Get.back();
+                                                        },
+                                                        child: Text('Xóa', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 15),)
+                                                    ),
+
+                                                  ],
+                                                )
+                                              );
+                                            },
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              children: [
+                                                Icon(Icons.delete, size: 18, color: Colors.teal,)
+                                              ],
+                                            ),
+                                          ),
+                                           Text(
                                             'Dặn dò',
                                             style: TextStyle(
                                                 fontSize: 15,

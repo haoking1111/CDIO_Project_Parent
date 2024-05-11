@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:cdio_project/controller/child_controller.dart';
 import 'package:cdio_project/controller/class_controller.dart';
 import 'package:cdio_project/view/ui/post_page.dart';
@@ -13,14 +15,37 @@ import 'comments_teacher_page.dart';
 import 'medicine_page.dart';
 import 'message_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final controllerChild = Get.put<ChildController>(ChildController());
-    final controllerClass = Get.put<ClassController>(ClassController());
+  State<HomePage> createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
+  final controllerChild = Get.put<ChildController>(ChildController());
+  final controllerClass = Get.put<ClassController>(ClassController());
+  late Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    // Khởi tạo timer trong phương thức initState
+    _timer = Timer.periodic(const Duration(seconds: 2), (_) {
+      controllerClass.fetchClass();
+      controllerChild.fetchChild();
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    // Hủy bỏ timer trong phương thức dispose
+    _timer.cancel();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         drawer: Drawer(
           backgroundColor: Colors.teal,
@@ -1015,8 +1040,9 @@ class HomePage extends StatelessWidget {
             }
           }
         },)
-    );;
+    );
   }
 }
+
 
 

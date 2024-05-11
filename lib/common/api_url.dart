@@ -9,4 +9,5 @@ class ApiUrl {
   static const updateParentInfUrl = '$apiUrl/api/user';
   static const addMedicineReminderUrl = '$apiUrl/api/medicine-reminder';
   static const deleteMedicineReminderUrl = '$apiUrl/api/medicine-reminder';
+  static const getNotificationUrl = '$apiUrl/api/notification';
 }

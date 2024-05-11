@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dashboard_page.dart';
-import 'login_teacher_page.dart';
 
 class LoginParentPage extends StatefulWidget {
   const LoginParentPage({super.key});

@@ -14,6 +14,7 @@ import 'album_page.dart';
 import 'comments_teacher_page.dart';
 import 'medicine_page.dart';
 import 'message_page.dart';
+import 'notification_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     // Khởi tạo timer trong phương thức initState
-    _timer = Timer.periodic(const Duration(seconds: 2), (_) {
+    _timer = Timer.periodic(const Duration(seconds: 200), (_) {
       controllerClass.fetchClass();
       controllerChild.fetchChild();
     });
@@ -63,9 +64,9 @@ class _HomePageState extends State<HomePage> {
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 50.0),
                   child: Column(children: [
-// header
+                // header
                     Container(
-                      padding: const EdgeInsets.only(bottom: 20),
+                      padding: const EdgeInsets.only(bottom: 40),
                       width: MediaQuery.of(context).size.width,
                       decoration: const BoxDecoration(
                         borderRadius: BorderRadius.only(
@@ -93,32 +94,48 @@ class _HomePageState extends State<HomePage> {
                                       icon: const Icon(
                                         Icons.menu_outlined,
                                         color: Colors.white,
-                                        size: 25,
+                                        size: 30,
                                       )
                                   ),
                                 ),
 
                                 Expanded(child: Container()),
-
-//Icon find
-                                IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.search_outlined,
-                                      color: Colors.white,
-                                      size: 25,
-                                    )),
-
-//Icon notifi
-                                IconButton(
-                                    onPressed: () {
-
-                                    },
-                                    icon: const Icon(
-                                      Icons.notifications_active_outlined,
-                                      color: Colors.white,
-                                      size: 25,
-                                    )),
+                            //Icon notifi
+                                Stack(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        Get.to(()=>NotificationPage());
+                                      },
+                                      icon: const Icon(
+                                        Icons.notifications_active_outlined,
+                                        color: Colors.white,
+                                        size: 30,
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 5,
+                                      right: 5, // Điều chỉnh vị trí container màu đỏ sang phải
+                                      child: Container(
+                                        width: 17,
+                                        height: 17,
+                                        decoration: BoxDecoration(
+                                          color: Colors.red,
+                                          borderRadius: BorderRadius.circular(50),
+                                        ),
+                                        child: Text(
+                                          '2',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
                               ],
                             ),
                           ),
@@ -128,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                               width: MediaQuery.of(context).size.width,
                               height: 112,
                               decoration: BoxDecoration(
-// color: Colors.black.withOpacity(0.5),
+                          // color: Colors.black.withOpacity(0.5),
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(color: Colors.white.withOpacity(0.13)),
                                   gradient: LinearGradient(

@@ -27,7 +27,7 @@ class _MedicinePageState extends State<MedicinePage> {
   void initState() {
     super.initState();
     // Khởi tạo timer trong phương thức initState
-    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+    _timer = Timer.periodic(const Duration(seconds: 2), (_) {
       controllerMedicineReminder.fetchMedicineReminder();
     });
   }

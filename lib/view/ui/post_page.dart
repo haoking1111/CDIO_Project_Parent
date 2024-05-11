@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 
 class PostPage extends StatefulWidget {
   const PostPage({super.key});
@@ -709,7 +710,7 @@ class _PostPageState extends State<PostPage> {
                                         ),
                                         child: IconButton(
                                             onPressed: () {
-
+                                              Share.share('Share Bai Viet');
                                             },
                                             icon: Icon(Icons.ios_share, size: 15, color: Colors.teal[400])
                                         ),

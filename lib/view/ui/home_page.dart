@@ -4,9 +4,13 @@ import 'dart:async';
 import 'package:cdio_project/controller/child_controller.dart';
 import 'package:cdio_project/controller/class_controller.dart';
 import 'package:cdio_project/view/ui/post_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../controller/notification_controller.dart';
 import '../../controller/parent_controller.dart';
 import '../../model/child/child_model.dart';
 import '../../model/class/class_model.dart';
@@ -26,15 +30,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final controllerChild = Get.put<ChildController>(ChildController());
   final controllerClass = Get.put<ClassController>(ClassController());
+  final notificationController = Get.put<NotificationController>(NotificationController());
   late Timer _timer;
 
   @override
   void initState() {
     super.initState();
     // Khởi tạo timer trong phương thức initState
-    _timer = Timer.periodic(const Duration(seconds: 200), (_) {
+    _timer = Timer.periodic(const Duration(seconds: 3), (_) {
       controllerClass.fetchClass();
       controllerChild.fetchChild();
+      notificationController.fetchNotification();
     });
   }
 
@@ -47,9 +53,171 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Child child = controllerChild.child.value!;
+    Class classInf = controllerClass.classInf.value!;
     return Scaffold(
         drawer: Drawer(
-          backgroundColor: Colors.teal,
+          backgroundColor: Colors.teal[400],
+          child: Padding(
+            padding: const EdgeInsets.only(top: 100, left: 30, right: 30),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Icon(Icons.person_pin, color: Colors.white, size: 25,),
+                    SizedBox(width: 10,),
+                    Text(
+                      '${child.fullName}',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        fontWeight: FontWeight.bold
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(height: 15,),
+                Row(
+                  children: [
+                    Icon(Icons.date_range, color: Colors.white, size: 25,),
+                    SizedBox(width: 10,),
+                    Text(
+                      '${child.birthDay}',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                      ),
+                    )
+                  ],
+                ),
+
+                SizedBox(height: 15,),
+
+                Row(
+                  children: [
+                    Icon(Icons.supervisor_account_outlined, color: Colors.white, size: 25,),
+                    SizedBox(width: 10,),
+                    Text(
+                      '${classInf.name}',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                      ),
+                    )
+                  ],
+                ),
+
+                SizedBox(height: 15,),
+
+                Row(
+                  children: [
+                    Icon(Icons.accessibility_new_rounded, color: Colors.white, size: 25,),
+                    SizedBox(width: 10,),
+                    Text(
+                      '${child.hobby}',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                      ),
+                    )
+                  ],
+                ),
+
+                SizedBox(height: 15,),
+
+                Row(
+                  children: [
+                    Icon(Icons.height, color: Colors.white, size: 25,),
+                    SizedBox(width: 10,),
+                    Text(
+                      '${child.height} cm',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                      ),
+                    )
+                  ],
+                ),
+
+                SizedBox(height: 15,),
+
+                Row(
+                  children: [
+                    Icon(Icons.monitor_weight, color: Colors.white, size: 25,),
+                    SizedBox(width: 10,),
+                    Text(
+                      '${child.weight} kg',
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                      ),
+                    )
+                  ],
+                ),
+
+                SizedBox(height: 20,),
+
+                Divider(color: Colors.white,),
+
+                SizedBox(height: 20,),
+
+
+                GestureDetector(
+                  onTap:() {
+                    Get.back();
+                    Get.to(()=>AlbumPage());
+                    print('tap');
+                  }, 
+                  child: Row(
+                    children: [
+                      Icon(Icons.image, color: Colors.white, size: 30,),
+                      SizedBox(width: 10,),
+                      Text(
+                        'Ảnh',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+
+                SizedBox(height: 20,),
+
+                Divider(color: Colors.white,),
+
+                SizedBox(height: 20,),
+
+                GestureDetector(
+                  onTap:() {
+                    Get.back();
+                    Get.to(()=>PostPage());
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.featured_play_list_rounded, color: Colors.white, size: 30,),
+                      SizedBox(width: 10,),
+                      Text(
+                        'Bài Viết',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
         body: Obx(() {
           if(controllerChild.isLoading.value) {
@@ -124,7 +292,7 @@ class _HomePageState extends State<HomePage> {
                                           borderRadius: BorderRadius.circular(50),
                                         ),
                                         child: Text(
-                                          '2',
+                                          '${notificationController.notification.value.length}',
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,

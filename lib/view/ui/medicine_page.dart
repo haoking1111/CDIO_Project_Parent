@@ -282,7 +282,7 @@ class _MedicinePageState extends State<MedicinePage> {
                               itemBuilder: (context, index) {
                                 final medicineReminderItem = controllerMedicineReminder.medicineReminder.value[index];
                                 return Padding(
-                                  padding:  EdgeInsets.only(top: 10),
+                                  padding:  EdgeInsets.only(top: 15, bottom: 10),
                                   child: Container(
                                     height: 150,
                                     width: MediaQuery.of(context).size.width,

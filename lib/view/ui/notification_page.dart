@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cdio_project/controller/notification_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -70,59 +71,40 @@ class _NotificationPageState extends State<NotificationPage> {
                                   onPressed: () {
                                     Get.back();
                                   },
-                                  icon: Icon(Icons.arrow_back_ios, color: Colors.black, size: 30,)
+                                  icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 30,)
                               ),
 
                               IconButton(
                                   onPressed: () {
                                     Get.back();
                                   },
-                                  icon: Icon(Icons.search, color: Colors.black, size: 25,)
+                                  icon: Icon(Icons.search, color: Colors.white, size: 25,)
                               ),
                             ],
                           ),
 
-                          SizedBox(height: 30,),
-
-                          Text(
-                            'Thông báo của ',
-                            style: TextStyle(
-                              fontSize: 38,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black
-                            ),
-                          ),
-                          Text(
-                            'Nhà Trường',
-                            style: TextStyle(
-                                fontSize: 38,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black
-                            ),
-                          ),
-
                           SizedBox(height: 10,),
 
-                          Icon(Icons.notifications_active_sharp, color: Colors.black, size: 35,),
+                          Icon(Icons.notifications_active_sharp, color: Colors.white, size: 70,),
 
                           SizedBox(height: 20,),
-                          Container(
-                            width: 350,
-                            height: 500,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(50),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 6,
-                                      offset: const Offset(0, 2))
-                                ]
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 30),
-                              child: SingleChildScrollView(
+                          SingleChildScrollView(
+                            child: Container(
+                              width: 350,
+                              height: 470,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(50),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 6,
+                                        offset: const Offset(0, 2))
+                                  ]
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 30),
                                 child: ListView.builder(
                                     padding: EdgeInsets.zero,
                                     shrinkWrap: true, // Add this line
@@ -137,7 +119,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                             title: Row(
                                               children:
                                               [
-                                                Text('${notificationItem.title}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17, color: Colors.redAccent),),
+                                                Text('${notificationItem.title}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17, color: Colors.redAccent, overflow: TextOverflow.ellipsis),),
 
                                                 Expanded(child: Container()),
 

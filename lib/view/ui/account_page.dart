@@ -41,7 +41,7 @@ class _AccountPageState extends State<AccountPage> {
   void initState() {
     super.initState();
     // Khởi tạo timer trong phương thức initState
-    _timer = Timer.periodic(const Duration(seconds: 200), (_) {
+    _timer = Timer.periodic(const Duration(seconds: 2), (_) {
       controllerClass.fetchClass();
       controllerChild.fetchChild();
       controllerParent.fetchParent();

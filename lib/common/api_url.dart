@@ -10,4 +10,6 @@ class ApiUrl {
   static const addMedicineReminderUrl = '$apiUrl/api/medicine-reminder';
   static const deleteMedicineReminderUrl = '$apiUrl/api/medicine-reminder';
   static const getNotificationUrl = '$apiUrl/api/notification';
+  static const getAllMessageUrl = '$apiUrl/api/message';
+  static const creatMessageUrl = '$apiUrl/api/message';
 }

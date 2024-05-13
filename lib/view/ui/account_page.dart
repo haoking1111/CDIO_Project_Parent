@@ -41,7 +41,7 @@ class _AccountPageState extends State<AccountPage> {
   void initState() {
     super.initState();
     // Khởi tạo timer trong phương thức initState
-    _timer = Timer.periodic(const Duration(seconds: 2), (_) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (_) {
       controllerClass.fetchClass();
       controllerChild.fetchChild();
       controllerParent.fetchParent();
@@ -128,6 +128,7 @@ class _AccountPageState extends State<AccountPage> {
                                       )
                                   ),
                                 ),
+                                SizedBox(height: 10,),
 
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -139,15 +140,9 @@ class _AccountPageState extends State<AccountPage> {
                                           fontWeight: FontWeight.bold
                                       ),
                                     ),
-
-                                    IconButton(
-                                        onPressed: () {
-
-                                        },
-                                        icon: Icon(Icons.edit, color: Colors.teal[300], size: 20,)
-                                    )
                                   ],
                                 ),
+                                SizedBox(height: 10,),
 
                                 Text(
                                   'Lớp: ${classInf.name}',

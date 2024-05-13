@@ -22,7 +22,7 @@ class _NotificationPageState extends State<NotificationPage> {
   void initState() {
     super.initState();
     // Khởi tạo timer trong phương thức initState
-    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (_) {
       notificationController.fetchNotification();
     });
   }

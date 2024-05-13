@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     // Khởi tạo timer trong phương thức initState
-    _timer = Timer.periodic(const Duration(seconds: 3), (_) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (_) {
       controllerClass.fetchClass();
       controllerChild.fetchChild();
       notificationController.fetchNotification();
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                       Icon(Icons.person_pin, color: Colors.white, size: 25,),
                       SizedBox(width: 10,),
                       Text(
-                        '${child.fullName}',
+                        'Bé: ${child.fullName}',
                         style: TextStyle(
                             fontSize: 20,
                             color: Colors.white,

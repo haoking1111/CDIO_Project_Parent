@@ -8,9 +8,9 @@ class BottomNavigationController extends GetxController {
   var selectedIndex = 0.obs;
 
   final screens = [
-    HomePage(),
-    ContactPage(),
-    AccountPage(),
+    const HomePage(),
+    const ContactPage(),
+    const AccountPage(),
   ];
 
   void changedIndex(int index) {

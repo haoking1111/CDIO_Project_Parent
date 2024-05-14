@@ -6,14 +6,11 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../common/api_url.dart';
 import '../model/child/child_model.dart';
-import '../model/parent/parent_model.dart';
 
 class ChildController extends GetxController{
   var child = Child().obs;
   var isLoading = true.obs;
 
-  static final Future<SharedPreferences> _preferences =
-  SharedPreferences.getInstance();
 
   @override
   void onInit() {

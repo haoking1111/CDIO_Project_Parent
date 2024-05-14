@@ -1,5 +1,6 @@
 
 import 'dart:convert';
+import 'package:cdio_project/common/toast.dart';
 import 'package:cdio_project/controller/auth_controller.dart';
 import 'package:cdio_project/controller/child_controller.dart';
 import 'package:cdio_project/model/child/child_model.dart';
@@ -7,7 +8,6 @@ import 'package:cdio_project/model/teacher/teacher_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../common/api_url.dart';
-import '../model/parent/parent_model.dart';
 
 class TeacherController extends GetxController{
   var teacher = Teacher().obs;
@@ -42,7 +42,7 @@ class TeacherController extends GetxController{
         final data = await response.stream.bytesToString();
         // Decode JSON into a Map<String, dynamic>
         Map<String, dynamic> jsonData = jsonDecode(data);
-        final teacherData = await Teacher.fromJson(jsonData);
+        final teacherData = Teacher.fromJson(jsonData);
 
 
 
@@ -53,20 +53,16 @@ class TeacherController extends GetxController{
 
         update();
 
-        print(teacher.value.fullName);
-        print(teacher.value.phoneNumber);
-        print(teacher.value.email);
 
 
       } else {
-        await Get.snackbar(
+         Get.snackbar(
             'Error loading data',
             'Sever responded: ${response.statusCode}:${response.reasonPhrase.toString()}'
         );
       }
     } catch (e) {
-      print('error: ' + e.toString());
-      // or throw an exception
+      showToast(message: 'Error');
     }
   }
 }

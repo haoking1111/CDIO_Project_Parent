@@ -9,8 +9,6 @@ import 'package:cdio_project/view/ui/post_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-//
-import '../../controller/auth_controller.dart';
 import '../../controller/child_controller.dart';
 import '../../controller/parent_controller.dart';
 import '../../model/child/child_model.dart';

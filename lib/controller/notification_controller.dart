@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cdio_project/common/api_url.dart';
+import 'package:cdio_project/common/toast.dart';
 import 'package:cdio_project/model/notification/notification_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -40,36 +41,19 @@ class NotificationController extends GetxController {
           final jsonData = jsonDecode(data) as Map<String, dynamic>;
           notification.value = [Notification.fromJson(jsonData)];
         }
-        if (notification.value.isNotEmpty) {
-          // Access the first element (assuming single entry)
-          print(notification.value[0].id);
-          print(notification.value[0].content);
-          print(notification.value[0].title);
-          print(notification.value[0].postDay);
-          print(notification.value[0].postMonth);
-          print(notification.value[0].postYear);
-          print('---------------------');
 
-          print(notification.value[1].id);
-          print(notification.value[1].content);
-          print(notification.value[1].title);
-          print(notification.value[1].postDay);
-          print(notification.value[1].postMonth);
-          print(notification.value[1].postYear);
-        }
         isLoading.value = false;
 
         update();
       } else {
-        await Get.snackbar(
+         Get.snackbar(
             'Error loading data',
             'Sever responded: ${response.statusCode}:${response.reasonPhrase
                 .toString()}'
         );
       }
     } catch (e) {
-      print('error: ' + e.toString());
-      // or throw an exception
+      showToast(message: 'Error');
     }
   }
 }

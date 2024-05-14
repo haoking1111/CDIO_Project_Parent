@@ -35,7 +35,7 @@ class ParentController extends GetxController {
         final data = await response.stream.bytesToString();
         // Decode JSON into a Map<String, dynamic>
         Map<String, dynamic> jsonData = jsonDecode(data);
-        final parentData = await Parent.fromJson(jsonData);
+        final parentData = Parent.fromJson(jsonData);
 
         // Lưu dữ liệu vào biến parent
         parent.value = parentData;
@@ -44,16 +44,12 @@ class ParentController extends GetxController {
 
         update();
 
-        print(parent.value.fullName);
-        print(parent.value.phoneNumber);
-        print(parent.value.email);
       } else {
-        await Get.snackbar('Error loading data',
+         Get.snackbar('Error loading data',
             'Sever responded: ${response.statusCode}:${response.reasonPhrase.toString()}');
       }
     } catch (e) {
-      print('error: ' + e.toString());
-      // or throw an exception
+      showToast(message: 'Error');
     }
   }
 
@@ -80,7 +76,7 @@ class ParentController extends GetxController {
 
 
     if (response.statusCode == 200) {
-      Future.delayed(Duration(seconds: 1),() {
+      Future.delayed(const Duration(seconds: 1),() {
         // Call Getx to update the parent data and reload the page
         Get.find<ParentController>().fetchParent();
         Get.back();
@@ -88,7 +84,7 @@ class ParentController extends GetxController {
       },
       );
     } else {
-      print(response.reasonPhrase);
+      // print(response.reasonPhrase);
     }
   }
 }

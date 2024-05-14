@@ -1,9 +1,9 @@
 
 import 'dart:convert';
+import 'package:cdio_project/common/toast.dart';
 import 'package:cdio_project/controller/auth_controller.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import '../common/api_url.dart';
 import '../model/child/child_model.dart';
 
@@ -43,39 +43,20 @@ class ChildController extends GetxController{
 
         isLoading.value = false;
 
-        // await saveChildId(childData.classroomId.toString());
-        // print('classId: ${await readChildId()}');
 
         update();
 
-        print(child.value.fullName);
-        print(child.value.age);
-        print('teacherId: ${child.value.teacherId}');
-        print('classid: ${child.value.classroomId.toString()}');
 
 
       } else {
-        await Get.snackbar(
+         Get.snackbar(
             'Error loading data',
             'Sever responded: ${response.statusCode}:${response.reasonPhrase.toString()}'
         );
       }
     } catch (e) {
-      print('error: ' + e.toString());
-      // or throw an exception
+      showToast(message: 'Error');
     }
   }
 
-  // Phương thức để lưu childId vào SharedPreferences
-  // static Future<void> saveChildId(String? child) async {
-  //   if (child != null) {
-  //     final prefs = await _preferences;
-  //     prefs.setString('childId', child);
-  //   }
-  // }
-  //
-  // // Phương thức để đọc childId từ SharedPreferences
-  // static Future<String?> readChildId() async {
-  //   return await _preferences.then((prefs) => prefs.getString('childId'));
-  // }
 }

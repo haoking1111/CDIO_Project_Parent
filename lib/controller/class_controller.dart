@@ -1,5 +1,6 @@
 
 import 'dart:convert';
+import 'package:cdio_project/common/toast.dart';
 import 'package:cdio_project/controller/auth_controller.dart';
 import 'package:cdio_project/model/class/class_model.dart';
 import 'package:get/get.dart';
@@ -48,7 +49,6 @@ class ClassController extends GetxController{
         classInf.value = classData;
         isLoading.value = false;
 
-        print('ClassName--------------: ${classInf.value.name}');
 
         update();
 
@@ -59,8 +59,7 @@ class ClassController extends GetxController{
         );
       }
     } catch (e) {
-      print('error: ' + e.toString());
-      // or throw an exception
+      showToast(message: 'Error');
     }
   }
 }

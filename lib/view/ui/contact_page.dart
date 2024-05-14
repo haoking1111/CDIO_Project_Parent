@@ -75,7 +75,7 @@ class _ContactPageState extends State<ContactPage> {
                               child: Text(
                                 'Trường Mầm Non',
                                 style: TextStyle(
-                                    fontSize: 35,
+                                    fontSize: 32,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
                               ),
@@ -88,7 +88,7 @@ class _ContactPageState extends State<ContactPage> {
                               child: Text(
                                 'Ánh',
                                 style: TextStyle(
-                                    fontSize: 45,
+                                    fontSize: 50,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
                               ),
@@ -98,13 +98,13 @@ class _ContactPageState extends State<ContactPage> {
                               child: Text(
                                 'Dương',
                                 style: TextStyle(
-                                    fontSize: 45,
+                                    fontSize: 50,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
                               ),
                             ),
                             SizedBox(
-                              height: 20,
+                              height: 10,
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width,

@@ -108,7 +108,7 @@ class _ContactPageState extends State<ContactPage> {
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width,
-                              height: 500,
+                              height: 480,
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   boxShadow: [

@@ -161,81 +161,90 @@ class _MessagePageState extends State<MessagePage> {
                         SizedBox(height: 20),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount:
-                                messageController.messageAll.value.length,
-                            itemBuilder: (context, index) {
-                              final message =
-                                  messageController.messageAll.value[index];
-                              final isSentByTeacher =
-                                  message.sendUserId == teacher.id;
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 510,
+                            child: SingleChildScrollView(
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount:
+                                    messageController.messageAll.value.length,
+                                itemBuilder: (context, index) {
+                                  final message =
+                                      messageController.messageAll.value[index];
+                                  final isSentByTeacher =
+                                      message.sendUserId == teacher.id;
 
-                              return buildMessage(
-                                message,
-                                isSentByTeacher,
-                              );
-                            },
+                                  return buildMessage(
+                                    message,
+                                    isSentByTeacher,
+                                  );
+                                },
+                              ),
+                            ),
                           ),
                         ),
-                        SizedBox(height: 80),
                         Padding(
                           padding: const EdgeInsets.all(15.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Icon(
-                                Icons.add_circle,
-                                color: Colors.teal,
-                              ),
-                              Icon(
-                                Icons.camera_alt,
-                                color: Colors.teal,
-                              ),
-                              Icon(Icons.image, color: Colors.teal),
-                              Icon(Icons.mic, color: Colors.teal),
-                              Container(
-                                width: 200,
-                                height: 45,
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.white),
-                                    borderRadius: BorderRadius.circular(12)),
-                                child: TextField(
-                                  style: TextStyle(color: Colors.white),
-                                  controller: _messageController,
-                                  decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide:
-                                          const BorderSide(color: Colors.white),
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide:
-                                          const BorderSide(color: Colors.teal),
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                    hintText: 'Aa',
-                                    hintStyle: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                    fillColor: Colors.teal[400],
-                                    filled: true,
-                                  ),
-                                ),
-                              ),
-                              //send
-                              GestureDetector(
-                                onTap: () {
-                                  messageController.creatMessage(_messageController.text.trim());
-                                  _messageController.clear();
-                                },
-                                child: Icon(
-                                  Icons.send,
+                          child: Positioned(
+                            bottom: 0,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Icon(
+                                  Icons.add_circle,
                                   color: Colors.teal,
                                 ),
-                              )
-                            ],
+                                Icon(
+                                  Icons.camera_alt,
+                                  color: Colors.teal,
+                                ),
+                                Icon(Icons.image, color: Colors.teal),
+                                Icon(Icons.mic, color: Colors.teal),
+                                Container(
+                                  width: 200,
+                                  height: 45,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.white),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  child: TextField(
+                                    style: TextStyle(color: Colors.white),
+                                    controller: _messageController,
+                                    decoration: InputDecoration(
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide:
+                                            const BorderSide(color: Colors.white),
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide:
+                                            const BorderSide(color: Colors.teal),
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      hintText: 'Aa',
+                                      hintStyle: TextStyle(
+                                        color: Colors.white,
+
+                                      ),
+                                      fillColor: Colors.teal[400],
+                                      filled: true,
+                                    ),
+                                  ),
+                                ),
+                                //send
+                                GestureDetector(
+                                  onTap: () {
+                                    messageController.creatMessage(_messageController.text.trim());
+                                    _messageController.clear();
+                                  },
+                                  child: Icon(
+                                    Icons.send,
+                                    color: Colors.teal,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ],

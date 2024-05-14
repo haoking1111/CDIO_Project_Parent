@@ -152,12 +152,11 @@ class _MessagePageState extends State<MessagePage> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 20),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10,),
+                            padding: const EdgeInsets.only(left: 10, right: 10),
                             child: Container(
                               width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height,
+                              height: 500,
                               child: SingleChildScrollView(
                                   child: ListView.builder(
                                     shrinkWrap: true,

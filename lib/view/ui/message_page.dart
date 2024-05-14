@@ -21,12 +21,11 @@ class _MessagePageState extends State<MessagePage> {
 
   TextEditingController _messageController = TextEditingController();
 
-  late Timer _timer; // Khai báo timer ở đây
+  late Timer _timer;
 
   @override
   void initState() {
     super.initState();
-    // Khởi tạo timer trong phương thức initState
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
       messageController.fetchMessage();
     });
@@ -35,7 +34,6 @@ class _MessagePageState extends State<MessagePage> {
   @override
   void dispose() {
     super.dispose();
-    // Hủy bỏ timer trong phương thức dispose
     _timer.cancel();
   }
 
@@ -152,26 +150,23 @@ class _MessagePageState extends State<MessagePage> {
                               ),
                             ),
                           ),
+                          SizedBox(height: 20),
                           Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: 500,
-                              child: SingleChildScrollView(
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    itemCount: messageController.messageAll.value.length,
-                                    itemBuilder: (context, index) {
-                                      final message = messageController.messageAll.value[index];
-                                      final isSentByTeacher = message.sendUserId == teacherController.teacher.value.id;
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: SingleChildScrollView(
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: messageController.messageAll.value.length,
+                                itemBuilder: (context, index) {
+                                  final message = messageController.messageAll.value[index];
+                                  final isSentByTeacher = message.sendUserId == teacherController.teacher.value.id;
 
-                                      return buildMessage(
-                                        message,
-                                        isSentByTeacher,
-                                      );
-                                    },
-                                  )
+                                  return buildMessage(
+                                    message,
+                                    isSentByTeacher,
+                                  );
+                                },
                               ),
                             ),
                           ),

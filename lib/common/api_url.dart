@@ -1,5 +1,5 @@
 class ApiUrl {
-  static const apiUrl ='http://192.168.50.210:8080';
+  static const apiUrl ='http://157.10.44.240:8080';
   static const authUrl = '$apiUrl/api/auth/login';
   static const getParentUrl = '$apiUrl/api/user';
   static const getTeacherUrl = '$apiUrl/api/user';
@@ -12,4 +12,6 @@ class ApiUrl {
   static const getNotificationUrl = '$apiUrl/api/notification';
   static const getAllMessageUrl = '$apiUrl/api/message';
   static const creatMessageUrl = '$apiUrl/api/message';
+  static const getAlbumByChildIdUrl = '$apiUrl/api/albums/child';
+  static const displayAlbumByChildIdUrl = 'api/albums/picture';
 }

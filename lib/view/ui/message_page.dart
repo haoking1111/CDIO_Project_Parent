@@ -55,13 +55,13 @@ class _MessagePageState extends State<MessagePage> {
                       Teacher teacher = teacherController.teacher.value;
                       return Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 23),
-                            child: Container(
-                              decoration: BoxDecoration(color: Colors.grey[200]),
+                          Container(
+                            decoration: BoxDecoration(color: Colors.grey[200]),
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 20, left: 10, right: 10, bottom: 10),
                               child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 20, left: 10, right: 10, bottom: 10),
+                                padding: const EdgeInsets.only(top: 23),
                                 child: Row(
                                   children: [
                                     IconButton(

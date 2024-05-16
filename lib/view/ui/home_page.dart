@@ -394,7 +394,7 @@ class _HomePageState extends State<HomePage> {
                                                   fontWeight: FontWeight.bold),
                                             ),
                                             Text(
-                                              '30/4/2024',
+                                              '30/8/2024',
                                               style: TextStyle(
                                                 fontSize: 15,
                                                 color: Colors.white,

@@ -57,97 +57,95 @@ class _MessagePageState extends State<MessagePage> {
                         children: [
                           Container(
                             decoration: BoxDecoration(color: Colors.grey[200]),
-                            child: Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 20, left: 10, right: 10, bottom: 10),
                               child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 20, left: 10, right: 10, bottom: 10),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 23),
-                                  child: Row(
-                                    children: [
-                                      IconButton(
-                                          onPressed: () {
-                                            Get.back();
-                                          },
-                                          icon: Icon(
-                                            Icons.arrow_back_ios,
-                                            color: Colors.black,
-                                          )),
-                                      Stack(
-                                        children: [
-                                          Container(
-                                            height: 50,
-                                            width: 50,
+                                padding: const EdgeInsets.only(top: 23),
+                                child: Row(
+                                  children: [
+                                    IconButton(
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        icon: Icon(
+                                          Icons.arrow_back_ios,
+                                          color: Colors.black,
+                                        )),
+                                    Stack(
+                                      children: [
+                                        Container(
+                                          height: 50,
+                                          width: 50,
+                                          decoration: BoxDecoration(
+                                              color: Colors.redAccent,
+                                              borderRadius: BorderRadius.circular(50),
+                                              image: const DecorationImage(
+                                                  image: AssetImage(
+                                                      'assets/images/teacher.png'),
+                                                  fit: BoxFit.cover)),
+                                        ),
+                                        Positioned(
+                                          bottom: 0,
+                                          right: 3,
+                                          child: Container(
+                                            height: 12,
+                                            width: 12,
                                             decoration: BoxDecoration(
-                                                color: Colors.redAccent,
-                                                borderRadius: BorderRadius.circular(50),
-                                                image: const DecorationImage(
-                                                    image: AssetImage(
-                                                        'assets/images/teacher.png'),
-                                                    fit: BoxFit.cover)),
+                                                color: Colors.green,
+                                                borderRadius: BorderRadius.circular(50)),
                                           ),
-                                          Positioned(
-                                            bottom: 0,
-                                            right: 3,
-                                            child: Container(
-                                              height: 12,
-                                              width: 12,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.green,
-                                                  borderRadius: BorderRadius.circular(50)),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: 15,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Cô ${teacher.fullName}',
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w700),
-                                          ),
-                                          Text(
-                                            'Đang hoạt động',
-                                            style: TextStyle(
-                                                fontSize: 11,
-                                                fontWeight: FontWeight.w400),
-                                          )
-                                        ],
-                                      ),
-                                      Expanded(child: Container()),
-                                      IconButton(
-                                          onPressed: () async {
-                                            final Uri url = Uri(
-                                                scheme: 'tel',
-                                                path: '${teacher.phoneNumber}');
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Cô ${teacher.fullName}',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                        Text(
+                                          'Đang hoạt động',
+                                          style: TextStyle(
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w400),
+                                        )
+                                      ],
+                                    ),
+                                    Expanded(child: Container()),
+                                    IconButton(
+                                        onPressed: () async {
+                                          final Uri url = Uri(
+                                              scheme: 'tel',
+                                              path: '${teacher.phoneNumber}');
 
+                                          await launchUrl(url);
+
+                                          if (await canLaunchUrl(url)) {
                                             await launchUrl(url);
-
-                                            if (await canLaunchUrl(url)) {
-                                              await launchUrl(url);
-                                            } else {
-                                              print('can not launch');
-                                            }
-                                          },
-                                          icon: Icon(
-                                            Icons.phone_in_talk,
-                                            color: Colors.teal,
-                                            size: 25,
-                                          )),
-                                      IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.videocam,
-                                            color: Colors.teal,
-                                            size: 25,
-                                          )),
-                                    ],
-                                  ),
+                                          } else {
+                                            print('can not launch');
+                                          }
+                                        },
+                                        icon: Icon(
+                                          Icons.phone_in_talk,
+                                          color: Colors.teal,
+                                          size: 25,
+                                        )),
+                                    IconButton(
+                                        onPressed: () {},
+                                        icon: Icon(
+                                          Icons.videocam,
+                                          color: Colors.teal,
+                                          size: 25,
+                                        )),
+                                  ],
                                 ),
                               ),
                             ),

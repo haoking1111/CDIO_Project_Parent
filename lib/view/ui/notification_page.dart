@@ -143,8 +143,8 @@ class _NotificationPageState extends State<NotificationPage> {
                                             ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.symmetric(horizontal: 50),
-                                            child:  Divider(color: Colors.teal[300],),
+                                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                                            child:  Divider(color: Colors.black,),
                                           ),
                                           SizedBox(height: 10,),
                                         ],

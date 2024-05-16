@@ -191,7 +191,7 @@ class _ContactPageState extends State<ContactPage> {
                                         GestureDetector(
                                           onTap: () {
                                             launchUrl(
-                                                Uri.parse('https://duytan.edu.vn/'),
+                                                Uri.parse('https://mnanhduongq3.hcm.edu.vn/homegd3'),
                                                 mode: LaunchMode.inAppBrowserView
                                             );
                                           },
@@ -224,7 +224,7 @@ class _ContactPageState extends State<ContactPage> {
                                                   width: 5,
                                                 ),
                                                 Text(
-                                                  'https://duytan.edu.vn/',
+                                                  'https://mnanhduongq3.hcm.edu.vn/homegd3',
                                                   style: TextStyle(
                                                     decoration: TextDecoration.underline,
                                                       fontWeight: FontWeight.w700),
@@ -472,7 +472,7 @@ class _ContactPageState extends State<ContactPage> {
                                                     fontWeight: FontWeight.w700),
                                               ),
                                               Text(
-                                                '${teacher.address}',
+                                                '${teacher.email}',
                                                 style: TextStyle(
                                                   decoration: TextDecoration.underline,
                                                     fontSize: 14,

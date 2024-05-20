@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:cdio_project/controller/child_controller.dart';
 import 'package:cdio_project/controller/class_controller.dart';
 import 'package:cdio_project/view/ui/account_page.dart';
+import 'package:cdio_project/view/ui/comment_list_page.dart';
 import 'package:cdio_project/view/ui/contact_page.dart';
 import 'package:cdio_project/view/ui/post_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -554,7 +555,7 @@ class _HomePageState extends State<HomePage> {
                                           children: [
                                             RawMaterialButton(
                                               onPressed: () {
-                                                Get.to(()=>CommentsTeacherPage());
+                                                Get.to(()=>CommentListPage());
                                               },
                                               elevation: 2.0,
                                               fillColor: Colors.lightBlue[50],

@@ -49,7 +49,7 @@ class AuthController extends GetxController {
         });
       }
     } catch (e) {
-      showToast(message: 'Error');
+      showToast(message: 'Error: ${e.toString()}');
     }
   }
 

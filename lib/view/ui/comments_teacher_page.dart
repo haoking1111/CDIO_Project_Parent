@@ -1,9 +1,11 @@
 import 'package:cdio_project/controller/class_controller.dart';
+import 'package:cdio_project/controller/comment_for_child_controller.dart';
 import 'package:cdio_project/controller/teacher_controller.dart';
 import 'package:cdio_project/model/teacher/teacher_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../common/toast.dart';
 import '../../model/class/class_model.dart';
 
 class CommentsTeacherPage extends StatefulWidget {
@@ -16,10 +18,13 @@ class CommentsTeacherPage extends StatefulWidget {
 class _CommentsTeacherPageState extends State<CommentsTeacherPage> {
   final teacherController = Get.put<TeacherController>(TeacherController());
   final classController = Get.put<ClassController>(ClassController());
+  final commentController = Get.put<CommentController>(CommentController());
 
   int attitudeScore = 10;
   int creativityScore = 10;
-  final TextEditingController commentController = TextEditingController();
+  TextEditingController commentTeacherController = TextEditingController();
+
+  final isLoading = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +99,7 @@ class _CommentsTeacherPageState extends State<CommentsTeacherPage> {
                             Row(
                               children: [
                                 Text(
-                                  'Chủ Nhiệm: ',
+                                  'Chủ Nhiệm Lớp: ',
                                   style: TextStyle(fontSize: 16),
                                 ),
                                 Text(
@@ -117,16 +122,31 @@ class _CommentsTeacherPageState extends State<CommentsTeacherPage> {
                     const SizedBox(height: 30),
                     buildCommentSection(),
                     const SizedBox(height: 30),
-
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.teal
-                      ),
-                      onPressed: () {
-
-                      },
-                      child: Text('Submit Comment', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                    ),
+                    Obx(() {
+                      if (isLoading.value) {
+                        return CircularProgressIndicator();
+                      } else {
+                        return ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.teal
+                          ),
+                          onPressed: () async {
+                            isLoading.value = true;
+                            await commentController.commentForTeacher(
+                                attitudeScore,
+                                creativityScore,
+                                commentTeacherController.text.trim()
+                            );
+                            Future.delayed(Duration(seconds: 1),() {
+                              isLoading.value = false;
+                              Get.back();
+                              showToast(message: 'Cảm ơn bạn đã nhận xét cô giáo trong tháng này !');
+                            },);
+                          },
+                          child: Text('Gửi nhận xét', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                        );
+                      }
+                    }),
                   ],
                 ),
               ),
@@ -235,12 +255,12 @@ class _CommentsTeacherPageState extends State<CommentsTeacherPage> {
           ),
           const SizedBox(height: 10),
           TextField(
-            controller: commentController,
+            controller: commentTeacherController,
             decoration: InputDecoration(
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20)
+                  borderRadius: BorderRadius.circular(20)
               ),
-              hintText: 'Viết bình luận về cô giáo...',
+              hintText: 'Viết nhận xét về cô giáo...',
             ),
             maxLines: 3,
           ),

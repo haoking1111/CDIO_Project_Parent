@@ -83,15 +83,10 @@ class _NotificationPageState extends State<NotificationPage> {
                             ],
                           ),
 
-                          SizedBox(height: 10,),
-
-                          Icon(Icons.notifications_active_sharp, color: Colors.white, size: 70,),
-
                           SizedBox(height: 20,),
                           SingleChildScrollView(
                             child: Container(
                               width: 350,
-                              height: 470,
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(50),
@@ -144,7 +139,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.symmetric(horizontal: 20),
-                                            child:  Divider(color: Colors.black,),
+                                            child:  Divider(color: Colors.grey[200],),
                                           ),
                                           SizedBox(height: 10,),
                                         ],

@@ -39,7 +39,7 @@ class _CommentListPageState extends State<CommentListPage> {
             Child child = childController.child.value;
             Teacher teacher = teacherController.teacher.value;
             return Container(
-              color: Colors.teal[400],
+              color: Colors.teal[300],
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                 child: Column(
@@ -68,14 +68,14 @@ class _CommentListPageState extends State<CommentListPage> {
                             children: [
                               SizedBox(width: 5,),
                               Text(
-                                'Bé ${child.fullName} trong tuần qua',
+                                'Sổ tay bé: ${child.fullName}',
                                 style: TextStyle(
                                   color: Colors.white,
-                                    fontSize: 18,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.w600
                                 ),
                               ),
-                              SizedBox(width: 5,),
+                              SizedBox(width: 15,),
                               Icon(Icons.arrow_forward_ios, color: Colors.white,)
                             ],
                           ),
@@ -106,11 +106,11 @@ class _CommentListPageState extends State<CommentListPage> {
                                 'Nhận xét cô ${teacher.fullName}',
                                 style: TextStyle(
                                   color: Colors.white,
-                                    fontSize: 18,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.w600
                                 ),
                               ),
-                              SizedBox(width: 5,),
+                              SizedBox(width: 15,),
                               Icon(Icons.arrow_forward_ios, color: Colors.white,)
                             ],
                           ),

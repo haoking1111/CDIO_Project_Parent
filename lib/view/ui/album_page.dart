@@ -249,7 +249,7 @@ class _AlbumPageState extends State<AlbumPage> {
                             final imageItem =
                             imageController.imageAll.value[index];
                             final imageUrl =
-                                '${ApiUrl.apiUrl}/${ApiUrl.displayAlbumByChildIdUrl}/${imageItem.image}';
+                                '${ApiUrl.displayAlbumByChildIdUrl}/${imageItem.image}';
                             return Row(
                               children: [
                                 GestureDetector(

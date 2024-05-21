@@ -77,7 +77,7 @@ class _AddMedicineReminderPageState extends State<AddMedicineReminderPage> {
 
                     Center(
                       child: Container(
-                        height: 450,
+                        height: 500,
                         width: 350,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -123,7 +123,7 @@ class _AddMedicineReminderPageState extends State<AddMedicineReminderPage> {
 
                                   Container(
                                     width: 250,
-                                    height: 50,
+                                    height: 65,
                                     decoration: BoxDecoration(
                                         border: Border.all(color: Colors.white),
                                         borderRadius: BorderRadius.circular(12)),
@@ -162,7 +162,7 @@ class _AddMedicineReminderPageState extends State<AddMedicineReminderPage> {
 
                                   Container(
                                     width: 250,
-                                    height: 50,
+                                    height: 65,
                                     decoration: BoxDecoration(
                                         border: Border.all(color: Colors.white),
                                         borderRadius: BorderRadius.circular(12)),

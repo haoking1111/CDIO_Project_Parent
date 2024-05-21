@@ -199,7 +199,7 @@ class _MessagePageState extends State<MessagePage> {
                 Icon(Icons.mic, color: Colors.teal),
                 Container(
                   width: 200,
-                  height: 45,
+                  height: 60,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.white),
                       borderRadius: BorderRadius.circular(12)),

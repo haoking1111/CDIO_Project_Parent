@@ -16,4 +16,5 @@ class ApiUrl {
   static const displayAlbumByChildIdUrl = '$apiUrl/api/image';
   static const getAllCommentForChild = '$apiUrl/api/childComment/child';
   static const creatCommentForTeacher = '$apiUrl/api/teacherComment';
+  static const getAllPost = '$apiUrl/api/post';
 }

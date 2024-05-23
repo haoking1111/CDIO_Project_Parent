@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controller/bottom_navigation.dart';
-import 'account_page.dart';
-import 'contact_page.dart';
-import 'home_page.dart';
 
 class DashBoardPage extends StatefulWidget {
   const DashBoardPage({super.key});

@@ -2,12 +2,8 @@ import 'dart:convert';
 
 import 'package:cdio_project/common/toast.dart';
 import 'package:cdio_project/controller/child_controller.dart';
-import 'package:cdio_project/controller/teacher_controller.dart';
 import 'package:cdio_project/model/child/child_model.dart';
 import 'package:cdio_project/model/image/image_model.dart';
-import 'package:cdio_project/model/message/message_model.dart';
-import 'package:cdio_project/model/teacher/teacher_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../common/api_url.dart';
 import 'auth_controller.dart';

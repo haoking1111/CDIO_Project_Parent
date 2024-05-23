@@ -2,9 +2,7 @@ import 'package:cdio_project/controller/child_controller.dart';
 import 'package:cdio_project/model/child/child_model.dart';
 import 'package:cdio_project/model/teacher/teacher_model.dart';
 import 'package:cdio_project/view/ui/comments_teacher_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../../controller/teacher_controller.dart';

@@ -7,18 +7,13 @@ import 'package:cdio_project/view/ui/account_page.dart';
 import 'package:cdio_project/view/ui/comment_list_page.dart';
 import 'package:cdio_project/view/ui/contact_page.dart';
 import 'package:cdio_project/view/ui/post_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../controller/notification_controller.dart';
-import '../../controller/parent_controller.dart';
 import '../../model/child/child_model.dart';
 import '../../model/class/class_model.dart';
 import 'album_page.dart';
-import 'comments_teacher_page.dart';
 import 'medicine_page.dart';
 import 'message_page.dart';
 import 'notification_page.dart';

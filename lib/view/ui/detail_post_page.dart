@@ -13,7 +13,7 @@ class DetailPostPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
-    final double imageHeight = screenHeight / 3;
+    final double imageHeight = screenHeight / 2;
 
     return Scaffold(
       appBar: AppBar(

@@ -282,7 +282,7 @@ class _MedicinePageState extends State<MedicinePage> {
                                 return Padding(
                                   padding:  EdgeInsets.only(top: 15, bottom: 10),
                                   child: Container(
-                                    height: 150,
+                                    height: 160,
                                     width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
                                         color: Colors.white,
